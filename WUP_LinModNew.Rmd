@@ -31,12 +31,49 @@ data <- read.csv(file="https://onlinestatbook.com/case_studies_rvls/physical_str
 
 ```
 
+# Introduction 
+We predict a simulated strength score based on arm and grip strength. We will find 3 different models and compare them. The response variable is numerical and the explanatory variable is numerical, meaning that we are using the num~num helper file.
+
 ## Model 1 SIM~ARMS
+
+## Results
+
+### Graphical Results 
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+plot(SIMS~ARM,data=data)
+abline(model.1, col='red')
+```
+
+This graph is showing that as the arm strength increases, the simulation follows.
+
+### Numerical Results 
+
+```{r}
+cor(SIMS~ARM,data=data)
+```
+
+The correlation is 0.69 which is showing that arm strength is related to sim score.
+
+### Inferential Results 
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+Both the intercept and the coefficient of ARM strength are significantly different from 0. 
+```{r}
+newdata = data.frame(ARM=88, GRIP=94)
+predict(model.1, newdata, interval="predict")
+```
+
+The prediction interval is from -1.7 to 3.1 for SIM score 
 
 ### scatterplot
 
 ### Numerical results
-
 
 ### Inferential  (Build model.1)
 
