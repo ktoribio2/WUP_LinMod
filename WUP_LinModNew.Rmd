@@ -116,7 +116,6 @@ The 95% prediction interval is from -3.1 to 2.0
 
 #### now add the model fit to our plot for model.2
 
-
 ## Model 3 SIM~ARM+GRIP
 
 ## Results 
@@ -128,13 +127,16 @@ model.3 <- lm(SIMS~ARM+GRIP,data=data)
 plot(SIMS~ARM+GRIP,data=data)
 abline(model.3, col='red')
 ```
+As arm + grip strength goes up, the simulation indicates that the sim goes up as well. We reject the null hypothesis because the p-value is so small. Both coefficients are significant. 
 
 ### Numerical results (cor)
 
 ```{r}
 cor(SIMS~ARM+GRIP,data=data)
 ```
-  
+
+The correlation is 0. which is showing that arm strength is related to sim score.
+
 ### Inferential  (Build 2-dimentional model.3)
 
 ```{r}
@@ -142,12 +144,16 @@ model.3 <- lm(SIMS~ARM+GRIP,data=data)
 summary.lm(model.3)
 ```
 
-#### predict model.3 at target point
+As arm + grip strength goes up the simulation indicates that the sim goes up as well, we reject the null hypothesis because the p-value is so small.Both coefficients are significant.
+
+#### Prediction Interval
 
 ```{r}
 newdata = data.frame(ARM=88, GRIP=94)
 predict(model.3, newdata, interval="predict")
 ```
+
+The prediction interval is from 0.15 to -2.13 for sim score 
 
 ## Comparing nested models ANOVA Test
 
@@ -155,4 +161,20 @@ predict(model.3, newdata, interval="predict")
 ### Model.2 vs Model.3
 
 ## Informally compare Model.1 with model.2
+
+```{r}
+anova(model.3,model.1)
+```
+The p-value is .00000499, concluding that I reject the null hypothesis. Model 1 is better than model 2 because the RSS for model 1 is smaller than model 2. 
+
+```{r}
+anova(model.3,model.2)
+```
+
+The p-value is . , concluding that I reject the null hypothesis. Model 3 is smaller than model 2 because the RSS for model 3 is smaller than model 2.
+
+# Discussion and Conclusion 
+
+All in all, model 3 is the best because it has a smaller RSS than both model 1 and model 2. Model 1 is better than model 2, but in order for it to be better, it would need a smaller RSS. In the end, we are rejecting the null hypothesis and model 3 is the best overall.
+
 
