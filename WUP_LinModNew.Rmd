@@ -120,15 +120,6 @@ The 95% prediction interval is from -3.1 to 2.0
 
 ## Results 
 
-### Graphical Results
-
-```{r}
-model.3 <- lm(SIMS~ARM+GRIP,data=data)
-plot(SIMS~ARM+GRIP,data=data)
-abline(model.3, col='red')
-```
-As arm + grip strength goes up, the simulation indicates that the sim goes up as well. We reject the null hypothesis because the p-value is so small. Both coefficients are significant. 
-
 ### Numerical results (cor)
 
 ```{r}
