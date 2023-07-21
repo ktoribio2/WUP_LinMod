@@ -63,7 +63,7 @@ model.1 <- lm(SIMS~ARM,data=data)
 summary.lm(model.1)
 ```
 
-Both the intercept and the coefficient of ARM strength are significantly different from 0.
+We reject the null hypothesis, both the intercept and the coefficient of ARM strength are significantly different from 0.
 
 ### Prediction Interval 
 
@@ -76,31 +76,78 @@ The prediction interval is from -1.7 to 3.1 for SIM score
 
 ## Model 2 SIM~GRIP
 
-### Now add in scatterplot
+## Results
 
+### Graphical Results 
+```{r}
+model.2 <- lm(SIMS~GRIP,data=data)
+plot(SIMS~GRIP,data=data)
+abline(model.2, col='red')
+```
+
+As the grip strength increases the sim increases. The spread of the points around the regression line  on the grip plot are more spread out than the arm strength plot.
 
 ### Numerical results 
 
+```{r}
+cor(SIMS~GRIP,data=data)
+```
 
-### Inferential  (Build model.2)
+The correlation is ).64, which shows that the grip strength is related to simulated strength score.
+
+### Inferential Results
   
+```{r}
+model.2 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.2)
+```
 
-#### predict model.2 at target point
+Based on the results, I reject the null hypothesis because the p-value is  too small as shown in the numbers above.
+
+
+#### Prediction Interval
+
+```{r}
+newdata = data.frame(ARM=88, GRIP=94)
+predict(model.2, newdata, interval="predict")
+```
+
+The 95% prediction interval is from -3.1 to 2.0
 
 #### now add the model fit to our plot for model.2
-  
 
 
 ## Model 3 SIM~ARM+GRIP
 
+## Results 
+
+### Graphical Results
+
+```{r}
+model.3 <- lm(SIMS~ARM+GRIP,data=data)
+plot(SIMS~ARM+GRIP,data=data)
+abline(model.3, col='red')
+```
+
 ### Numerical results (cor)
 
-`
+```{r}
+cor(SIMS~ARM+GRIP,data=data)
+```
   
 ### Inferential  (Build 2-dimentional model.3)
 
+```{r}
+model.3 <- lm(SIMS~ARM+GRIP,data=data)
+summary.lm(model.3)
+```
+
 #### predict model.3 at target point
-  
+
+```{r}
+newdata = data.frame(ARM=88, GRIP=94)
+predict(model.3, newdata, interval="predict")
+```
 
 ## Comparing nested models ANOVA Test
 
